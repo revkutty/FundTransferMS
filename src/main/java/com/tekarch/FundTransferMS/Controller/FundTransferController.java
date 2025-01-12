@@ -34,17 +34,17 @@ public class FundTransferController {
     }
 
 
-    @GetMapping("/sender/{sender_account}")
+    @GetMapping("/sender/{senderAccount}")
     public ResponseEntity<List<FundTransfer>> getTransfersBySender(@PathVariable Long senderAccount) {
         return ResponseEntity.ok(fundTransferService.getTransfersBySender(senderAccount));
     }
 
-    @GetMapping("/receiver/{receiver_account}")
+    @GetMapping("/receiver/{receiverAccount}")
     public ResponseEntity<List<FundTransfer>> getTransfersByReceiver(@PathVariable Long receiverAccount) {
         return ResponseEntity.ok(fundTransferService.getTransfersByReceiver(receiverAccount));
     }
 
-    @GetMapping("/{status}")
+    @GetMapping("/status/{status}")
     public ResponseEntity<List<FundTransfer>> getTransfersByStatus(@PathVariable String status) {
         return ResponseEntity.ok(fundTransferService.getTransfersByStatus(status));
     }

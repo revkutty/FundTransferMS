@@ -55,3 +55,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+bootJar {
+	archiveBaseName.set('fund-transfer-ms')
+	archiveVersion.set('1.0.0')
+}

@@ -6,6 +6,7 @@ import com.tekarch.FundTransferMS.Repository.FundTransferRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,6 +34,11 @@ public class FundTransferServiceImpl implements FundTransferServiceInterface{
         this.fundTransferRepository = fundTransferRepository;
     }
 
+    @Value("${app.account-service.url}")
+    String accounturl;
+
+    @Value("${app.account-service.update-balance.url}")
+    String updatebalance;
 
     @Override
     public List<FundTransfer> getTransfersBySender(Long senderAccount) {
@@ -94,13 +100,14 @@ public class FundTransferServiceImpl implements FundTransferServiceInterface{
 
 
     private AccountDTO getAccountById(Long accountId) {
-        String url = "http://localhost:8082/api/account/" + accountId;
-        return restTemplate.getForObject(url, AccountDTO.class);
+     //   String url = "http://localhost:8082/api/account/" + accountId;
+
+        return restTemplate.getForObject(accounturl+accountId, AccountDTO.class);
     }
 
     private void updateAccountBalance(Long accountId, BigDecimal newBalance) {
-        String url = "http://localhost:8082/api/account/" + accountId + "/update-balance";
-
+     //   String url = "http://localhost:8082/api/account/" + accountId + "/update-balance";
+          String url = accounturl + accountId + updatebalance;
         // Create the AccountDTO object with the updated balance
         AccountDTO accountDTO = new AccountDTO(accountId, newBalance);
 
