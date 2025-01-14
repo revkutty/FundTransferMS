@@ -22,8 +22,6 @@ public class FundTransferServiceImpl implements FundTransferServiceInterface{
 
     private static final Logger logger = LogManager.getLogger(FundTransferServiceImpl.class);
 
-  //  private final AccountService accountService;
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -101,8 +99,8 @@ public class FundTransferServiceImpl implements FundTransferServiceInterface{
 
     private AccountDTO getAccountById(Long accountId) {
      //   String url = "http://localhost:8082/api/account/" + accountId;
-
-        return restTemplate.getForObject(accounturl+accountId, AccountDTO.class);
+        System.out.println("Get Account ID URL in FundTransfer:" + accounturl + accountId);
+        return restTemplate.getForObject(accounturl + accountId, AccountDTO.class);
     }
 
     private void updateAccountBalance(Long accountId, BigDecimal newBalance) {
